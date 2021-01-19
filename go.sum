@@ -1,0 +1,4 @@
+github.com/winlabs/gowin32 v0.0.0-20201021184923-54ddf04f16e6 h1:qr4FxTX5Nn3ufPDLLuhoPckwwOzRTyq0zhI3RMHLOK4=
+github.com/winlabs/gowin32 v0.0.0-20201021184923-54ddf04f16e6/go.mod h1:N51TYkG9JGR5sytj0EoPl31Xg2kuB507lxEmrwSNvfQ=
+golang.org/x/sys v0.0.0-20210113181707-4bcb84eeeb78 h1:nVuTkr9L6Bq62qpUqKo/RnZCFfzDBL0bYo6w9OJUqZY=
+golang.org/x/sys v0.0.0-20210113181707-4bcb84eeeb78/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
