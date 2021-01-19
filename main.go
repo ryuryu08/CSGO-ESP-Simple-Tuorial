@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"main/gdi32"
 	"main/memory"
 	"main/prcocess"
@@ -28,8 +27,8 @@ const (
 
 	// View Property
 	rolePitchOffset = 0x12C
-	roleYawOffset = 0x12C
-	roleRollOffset = 0x12C
+	roleYawOffset = 0x130
+	roleRollOffset = 0x134
 )
 
 type Role struct{
@@ -52,12 +51,8 @@ var (
 )
 
 func init() {
-	fmt.Println("wait for game running")
 	InitialMemoryAddress()
 	InitialDrawing()
-	fmt.Println("complete")
-	fmt.Printf("GAME PID：%x\nProcess Handle：%x\nWindow Handle：%x\nWindow HDC：%x\n",
-		gamePid, gameHandle, gameWindowHandle, gameWindowDC)
 }
 
 func main() {
@@ -76,12 +71,18 @@ func main() {
 	}
 }
 
+/*
+	绘制方块
+ */
 func DrawESP(p view.ScreenPosition) {
 	width := float32(p.TopY - p.BottomY)
 	width *= 0.516515151552
 	gdi32.DrawBorderBox(int(float32(p.X) - width / 2), int(p.TopY), int(width), int(p.BottomY - p.TopY), 3)
 }
 
+/**
+	更新全局角色数据， 三个err处理主要是为了防止游戏在一局结束后读取失败造成程序退出
+ */
 func roleUpdate(i int){
 	var err error
 	viewMatrix, err = memory.ReadMemoryViewMatrix(gameHandle, clientAddress + viewMatrixOffset)
@@ -104,6 +105,9 @@ func roleUpdate(i int){
 	}
 }
 
+/*
+	初始化绘制
+ */
 func InitialDrawing() {
 	for {
 		gameWindowHandle, err := gdi32.FindWindow(gameWindowName)
@@ -120,9 +124,13 @@ func InitialDrawing() {
 	}
 }
 
+/*
+	内存读取初始化
+ */
 func InitialMemoryAddress() {
 	for {
-		gamePid, err := prcocess.FindProcessIdByName("csgo.exe")
+		var err error
+		gamePid, err = prcocess.FindProcessIdByName("csgo.exe")
 		if err != nil {
 			time.Sleep(time.Duration(1) * time.Second)
 			continue

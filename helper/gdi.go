@@ -70,11 +70,11 @@ func FindWindow(title string) (syscall.Handle, error) {
 			return 1 // continue enumeration
 		}
 		if syscall.UTF16ToString(b) == title {
-			// note the window
+			// 记录
 			hwnd = h
-			return 0 // stop enumeration
+			return 0 // 停止
 		}
-		return 1 // continue enumeration
+		return 1 // 继续
 	})
 	_ = EnumWindows(cb, 0)
 	if hwnd == 0 {
