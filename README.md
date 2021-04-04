@@ -14,7 +14,7 @@ ESP即Extrasensory perception的缩写， 通常被称作方框透视， 通过�
 
 ## 开发环境
 
-+ 截至 2020年1月19日 CSGO Steam最新版
++ 截至 2020年1月19日 Steam平台CSGO最新版
 + Windows 10 专业版 1903 
 + Go 1.56.6
 + Goland
